@@ -25,6 +25,9 @@ This project runs on [CircuitPython 9](https://circuitpython.org/board/adafruit_
 - adafruit_ntp
 - adafruit_requests
 
+> [!IMPORTANT]
+> You must install the correct version of CircuitPython that matches the Feaather board you're using!
+
 You can download the **lib.zip** file from this repository and copy its contents to the `lib` folder on the `CIRCUITPY` drive if you plan to build one yourself.
 
 ### settings.toml
