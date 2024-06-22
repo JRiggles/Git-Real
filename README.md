@@ -4,7 +4,7 @@
 
 Built with CircuitPython
 
-<img src="images/demo.gif" />
+<img src="images/demo.gif" alt="a small green LED matrix display showing a brief animation followed by my GitHub contribution graph"/>
 
 ## Hardware
 - [Adafruit ESP32 S3 Feather](https://www.adafruit.com/product/5477) (4MB w/ 2MB SRAM version)
