@@ -4,6 +4,8 @@
 
 Built with CircuitPython
 
+<img src="images/demo.gif" />
+
 ## Hardware
 - [Adafruit ESP32 S3 Feather](https://www.adafruit.com/product/5477) (4MB w/ 2MB SRAM version)
 - [Adafruit 15x7 CharliePlex LED Matrix Display FeatherWing](https://www.adafruit.com/product/3136) (in green, of course!)
