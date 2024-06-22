@@ -56,7 +56,7 @@ def get_rows(data: str) -> list[map]:
     # split the rows into maps of strings, keeping the last 'display.width'
     # elements
     string_maps = [
-        map(str.strip, row.split(',')[-display.width:]) for row in rows
+        map(str.strip, row.split(',')[-display.width - 1:-1]) for row in rows
     ]
     return string_maps
 
@@ -89,7 +89,7 @@ def randomize(frames: int) -> None:
         for col in range(display.width):
             for row in range(display.height):
                 brightness = randrange(0, max_brightness)
-                if brightness > max_brightness / 2:  # skew towards 0
+                if brightness % 2 == 0:  # skew towards 0
                     brightness = 0
                 display.pixel(col, row, brightness)
 
