@@ -28,7 +28,7 @@ max_brightness = 255
 
 
 def connect() -> Session:
-    """Connect to WiFI and return a `Session` object"""
+    """Connect to WiFi and return a `Session` object"""
     wifi.radio.connect(SSID, PWD)
     pool = socketpool.SocketPool(wifi.radio)
     # get the current time from a NTP server
