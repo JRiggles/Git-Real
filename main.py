@@ -1,5 +1,5 @@
 import adafruit_ntp
-import board
+import board  # type: ignore (disregard import error - Pylance is wrong)
 import busio
 import os
 import rtc
@@ -24,7 +24,7 @@ PWD = os.getenv('CIRCUITPY_WIFI_PASSWORD')
 
 i2c = busio.I2C(board.SCL, board.SDA)
 display = CharlieWing(i2c)
-max_brightness = 255
+max_brightness = 64
 
 
 def connect() -> Session:
@@ -56,8 +56,9 @@ def get_rows(data: str) -> list[map]:
     # split the rows into maps of strings, keeping the last 'display.width'
     # elements
     string_maps = [
-        map(str.strip, row.split(',')[-display.width - 1:-1]) for row in rows
-    ]
+        map(str.strip, row.split(',')[-display.width:]) for row in rows
+    ][:-1]  # remove empty element at the end
+
     return string_maps
 
 
@@ -86,18 +87,18 @@ def update_display(led_values: list[int]) -> None:
 def randomize(frames: int) -> None:
     """Show a random array on the display for the number of `frames` given"""
     for _ in range(frames):
-        for col in range(display.width):
-            for row in range(display.height):
-                brightness = randrange(0, max_brightness)
-                if brightness % 2 == 0:  # skew towards 0
-                    brightness = 0
-                display.pixel(col, row, brightness)
+        for pixel in range(display.width * display.height):
+            y, x = divmod(pixel, display.height)
+            brightness = randrange(0, max_brightness)
+            if brightness % 2:  # skew towards 0
+                brightness = 0
+            display.pixel(y, x, brightness)
 
 
 def mainloop() -> None:
     session = connect()
-    last_update_time = 0
-    while True:
+    last_update_time = None
+    while True:  # check for updates every hour
         if (current_hour := rtc.RTC().datetime.tm_hour) != last_update_time:
             data = get_data(session)
             rows = get_rows(data)
