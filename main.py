@@ -58,7 +58,6 @@ def get_rows(data: str) -> list[map]:
     string_maps = [
         map(str.strip, row.split(',')[-display.width:]) for row in rows
     ][:-1]  # remove empty element at the end
-
     return string_maps
 
 
@@ -106,8 +105,7 @@ def mainloop() -> None:
             randomize(16)  # show refresh animation
             update_display(led_values)
             last_update_time = current_hour
-
-        time.sleep(60)
+        time.sleep(300)
 
 
 if __name__ == '__main__':
